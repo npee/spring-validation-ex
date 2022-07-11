@@ -1,7 +1,6 @@
 spring:
-  config:
-    activate:
-      on-profile: local
+  profiles:
+    active: local
 logging:
   level:
     org.springframework.transaction.interceptor: TRACE
