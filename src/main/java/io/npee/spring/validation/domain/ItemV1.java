@@ -11,7 +11,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 @Getter
-public class Item {
+public class ItemV1 {
 
     @Id
     @GeneratedValue
@@ -21,7 +21,7 @@ public class Item {
 
     private Integer price;
 
-    public Item(String name, Integer price) {
+    public ItemV1(String name, Integer price) {
         this.name = name;
         this.price = price;
     }

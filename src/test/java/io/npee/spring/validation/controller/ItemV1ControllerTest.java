@@ -6,7 +6,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import io.npee.spring.validation.domain.Item;
+import io.npee.spring.validation.domain.ItemV1;
 import lombok.extern.slf4j.Slf4j;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,7 +19,7 @@ import org.springframework.test.web.servlet.MvcResult;
 @Slf4j
 @SpringBootTest
 @AutoConfigureMockMvc
-class ItemControllerTest {
+class ItemV1ControllerTest {
 
     @Autowired
     ObjectMapper objectMapper;
@@ -28,7 +28,7 @@ class ItemControllerTest {
 
     @Test
     void addItemTest() throws Exception{
-        Item item = new Item("itemA", 20000);
+        ItemV1 item = new ItemV1("itemA", 20000);
         MvcResult mvcResult = this.mockMvc.perform(post("/api/v1/item")
                                                        .contentType(MediaType.APPLICATION_JSON)
                                                        .content(objectMapper.writeValueAsString(item)))
@@ -36,7 +36,7 @@ class ItemControllerTest {
                                           .andExpect(status().isOk())
                                           .andReturn();
         String contentAsString = mvcResult.getResponse().getContentAsString();
-        Item responseItem = objectMapper.readValue(contentAsString, Item.class);
+        ItemV1 responseItem = objectMapper.readValue(contentAsString, ItemV1.class);
         assertEquals(item.getName(), responseItem.getName());
         assertEquals(item.getPrice(), responseItem.getPrice());
     }

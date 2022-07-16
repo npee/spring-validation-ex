@@ -1,7 +1,7 @@
 package io.npee.spring.validation.controller;
 
-import io.npee.spring.validation.domain.Item;
-import io.npee.spring.validation.service.ItemService;
+import io.npee.spring.validation.domain.ItemV1;
+import io.npee.spring.validation.service.ItemServiceV1;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -12,12 +12,12 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @RequestMapping("/api/v1/item")
 @RequiredArgsConstructor
-public class ItemController {
+public class ItemControllerV1 {
 
-    private final ItemService itemService;
+    private final ItemServiceV1 itemService;
 
     @PostMapping
-    public ResponseEntity<Item> addItem(@RequestBody Item item) {
+    public ResponseEntity<ItemV1> addItemV1(@RequestBody ItemV1 item) {
         return ResponseEntity.ok(itemService.createItem(item));
     }
 
