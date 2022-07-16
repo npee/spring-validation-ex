@@ -26,6 +26,6 @@ class ItemControllerTest {
                                  .content("{\"name\":\"itemA\",\"price\":\"20000\"}"))
                     .andDo(print())
                     .andExpect(status().isOk())
-                    .andReturn();;
+                    .andReturn();
     }
 }
