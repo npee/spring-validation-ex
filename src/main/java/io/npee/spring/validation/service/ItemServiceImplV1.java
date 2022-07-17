@@ -7,7 +7,7 @@ import org.springframework.stereotype.Service;
 
 @Service
 @RequiredArgsConstructor
-public class ItemServiceV1Impl implements ItemServiceV1 {
+public class ItemServiceImplV1 implements ItemService<ItemV1> {
 
     private final ItemRepositoryV1 itemRepository;
 

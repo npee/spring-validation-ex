@@ -8,7 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
 @SpringBootTest
-class ItemV1RepositoryTest {
+class ItemRepositoryV1Test {
 
     @Autowired
     ItemRepositoryV1 itemRepository;
