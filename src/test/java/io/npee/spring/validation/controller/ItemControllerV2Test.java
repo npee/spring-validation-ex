@@ -31,7 +31,7 @@ class ItemControllerV2Test {
     @Test
     void addItemTest() throws Exception{
         ItemV2 item = new ItemV2("itemA", new PriceV2("TRADE", 10000, 20000));
-        MvcResult mvcResult = this.mockMvc.perform(post("/api/v2/item")
+        MvcResult mvcResult = this.mockMvc.perform(post("/api/v2/item-v1")
                                                        .contentType(MediaType.APPLICATION_JSON)
                                                        .content(objectMapper.writeValueAsString(item)))
                                           .andDo(print())
@@ -41,5 +41,16 @@ class ItemControllerV2Test {
         ItemV2 responseItem = objectMapper.readValue(contentAsString, ItemV2.class);
         assertEquals(item.getName(), responseItem.getName());
         assertEquals(item.getPrice().getMax(), responseItem.getPrice().getMax());
+    }
+
+    @Test
+    void addValidatedItemTest() throws Exception{
+        ItemV2 item = new ItemV2("itemA", null);
+        this.mockMvc.perform(post("/api/v2/item-v2")
+                                                       .contentType(MediaType.APPLICATION_JSON)
+                                                       .content(objectMapper.writeValueAsString(item)))
+                                          .andDo(print())
+                                          .andExpect(status().isBadRequest())
+                                          .andReturn();
     }
 }
