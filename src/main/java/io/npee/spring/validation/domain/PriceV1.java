@@ -9,7 +9,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 @Getter
-public class PriceV2 {
+public class PriceV1 {
 
     private Boolean isDetermined;
     private Integer max;

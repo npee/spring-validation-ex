@@ -6,9 +6,8 @@ import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import io.npee.spring.validation.domain.ItemV1;
 import io.npee.spring.validation.domain.ItemV2;
-import io.npee.spring.validation.domain.PriceV2;
+import io.npee.spring.validation.domain.PriceV1;
 import lombok.extern.slf4j.Slf4j;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -30,7 +29,7 @@ class ItemControllerV2Test {
 
     @Test
     void addItemTest() throws Exception{
-        ItemV2 item = new ItemV2("itemA", new PriceV2(Boolean.FALSE, 10000, 20000));
+        ItemV2 item = new ItemV2("itemA", new PriceV1(Boolean.FALSE, 10000, 20000));
         MvcResult mvcResult = this.mockMvc.perform(post("/api/v2/item-v1")
                                                        .contentType(MediaType.APPLICATION_JSON)
                                                        .content(objectMapper.writeValueAsString(item)))

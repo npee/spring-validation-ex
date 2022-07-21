@@ -11,7 +11,6 @@ import javax.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
-import org.hibernate.annotations.Comment;
 
 @Entity
 @AllArgsConstructor
@@ -33,7 +32,7 @@ public class ItemV3 {
         @AttributeOverride(name="min", column=@Column(name="buyPriceMin")),
     })
     @Column(insertable = false, updatable = false)
-    private PriceV2 buyPrice;
+    private PriceV1 buyPrice;
 
     @NotNull
     @Embedded
@@ -43,9 +42,9 @@ public class ItemV3 {
         @AttributeOverride(name="min", column=@Column(name="rentPriceMin")),
     })
     @Column(insertable = false, updatable = false)
-    private PriceV2 rentPrice;
+    private PriceV1 rentPrice;
 
-    public ItemV3(String name, PriceV2 buyPrice, PriceV2 rentPrice) {
+    public ItemV3(String name, PriceV1 buyPrice, PriceV1 rentPrice) {
         this.name = name;
         this.buyPrice = buyPrice;
         this.rentPrice = rentPrice;

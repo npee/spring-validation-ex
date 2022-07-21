@@ -23,9 +23,9 @@ public class ItemV2 {
 
     @NotNull
     @Embedded
-    private PriceV2 price;
+    private PriceV1 price;
 
-    public ItemV2(String name, PriceV2 price) {
+    public ItemV2(String name, PriceV1 price) {
         this.name = name;
         this.price = price;
     }
