@@ -11,7 +11,7 @@ import lombok.NoArgsConstructor;
 @Getter
 public class PriceV2 {
 
-    private String type;
+    private Boolean isDetermined;
     private Integer max;
     private Integer min;
 }

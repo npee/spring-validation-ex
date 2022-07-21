@@ -17,7 +17,7 @@ class ItemRepositoryV2Test {
 
     @Test
     void create() {
-        ItemV2 item = new ItemV2("itemA", new PriceV2("BUY", 5000, 10000));
+        ItemV2 item = new ItemV2("itemA", new PriceV2(Boolean.TRUE, 5000, 10000));
         ItemV2 saved = itemRepository.save(item);
         assertEquals(item.getName(), saved.getName());
     }

@@ -30,7 +30,7 @@ class ItemControllerV2Test {
 
     @Test
     void addItemTest() throws Exception{
-        ItemV2 item = new ItemV2("itemA", new PriceV2("TRADE", 10000, 20000));
+        ItemV2 item = new ItemV2("itemA", new PriceV2(Boolean.FALSE, 10000, 20000));
         MvcResult mvcResult = this.mockMvc.perform(post("/api/v2/item-v1")
                                                        .contentType(MediaType.APPLICATION_JSON)
                                                        .content(objectMapper.writeValueAsString(item)))
