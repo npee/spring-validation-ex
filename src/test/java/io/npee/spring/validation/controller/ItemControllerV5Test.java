@@ -19,6 +19,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.MvcResult;
+import org.springframework.test.web.servlet.result.StatusResultMatchers;
 
 @Slf4j
 @SpringBootTest
@@ -47,25 +48,8 @@ class ItemControllerV5Test {
     }
 
     @Test
-    void addValidatedPriceTest_success() throws Exception{
-        ItemV5 item = new ItemV5("itemA", new PriceV3(Boolean.TRUE, 10000, 20000), null);
-        MvcResult mvcResult = this.mockMvc.perform(post("/api/v5/item-v2")
-                                                       .contentType(MediaType.APPLICATION_JSON)
-                                                       .content(objectMapper.writeValueAsString(item)))
-                                          .andDo(print())
-                                          .andExpect(status().isOk())
-                                          .andReturn();
-        String contentAsString = mvcResult.getResponse().getContentAsString();
-        ItemV5 responseItem = objectMapper.readValue(contentAsString, ItemV5.class);
-        assertEquals(item.getName(), responseItem.getName());
-        assertEquals(item.getBuyPrice().getMax(), responseItem.getBuyPrice().getMax());
-        assertNull(item.getRentPrice());
-        assertNull(responseItem.getRentPrice());
-    }
-
-    @Test
-    void addValidatedPriceTest_bad_request() throws Exception{
-        ItemV5 item = new ItemV5("itemA", null, null);
+    void addValidatedPriceConstraintTest_bad_request() throws Exception{
+        ItemV5 item = new ItemV5("itemA", new PriceV3(Boolean.FALSE, 10000, 20000), new PriceV3(Boolean.TRUE, 20000, 10000));
         this.mockMvc.perform(post("/api/v5/item-v2")
                                  .contentType(MediaType.APPLICATION_JSON)
                                  .content(objectMapper.writeValueAsString(item)))
@@ -75,8 +59,8 @@ class ItemControllerV5Test {
     }
 
     @Test
-    void addValidatedInnerPriceTest_success() throws Exception{
-        ItemV5 item = new ItemV5("itemA", new PriceV3(Boolean.FALSE, 100000, null), new PriceV3(Boolean.TRUE, 10000, null));
+    void addValidatedPriceConstraintTest_success() throws Exception{
+        ItemV5 item = new ItemV5("itemA", new PriceV3(Boolean.FALSE, 10000, 20000), new PriceV3(Boolean.TRUE, null, null));
         MvcResult mvcResult = this.mockMvc.perform(post("/api/v5/item-v2")
                                                        .contentType(MediaType.APPLICATION_JSON)
                                                        .content(objectMapper.writeValueAsString(item)))
@@ -88,17 +72,6 @@ class ItemControllerV5Test {
         assertEquals(item.getName(), responseItem.getName());
         assertEquals(item.getBuyPrice().getMax(), responseItem.getBuyPrice().getMax());
         assertEquals(item.getRentPrice().getMax(), responseItem.getRentPrice().getMax());
-    }
-
-    @Test
-    void addValidatedInnerPriceTest_bad_request() throws Exception{
-        ItemV5 item = new ItemV5("itemA", new PriceV3(Boolean.FALSE, null, 200000), new PriceV3(Boolean.TRUE, null, 20000));
-        this.mockMvc.perform(post("/api/v5/item-v2")
-                                                       .contentType(MediaType.APPLICATION_JSON)
-                                                       .content(objectMapper.writeValueAsString(item)))
-                                          .andDo(print())
-                                          .andExpect(status().isBadRequest())
-                                          .andReturn();
     }
 
 }

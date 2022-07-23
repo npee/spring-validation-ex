@@ -34,6 +34,7 @@ public class ItemV5 {
     })
     @Column(insertable = false, updatable = false)
     @NotNull
+    @ValidPrice
     private PriceV3 buyPrice;
 
     @Valid
@@ -44,6 +45,8 @@ public class ItemV5 {
         @AttributeOverride(name="min", column=@Column(name="rentPriceMin")),
     })
     @Column(insertable = false, updatable = false)
+    @NotNull
+    @ValidPrice
     private PriceV3 rentPrice;
 
     public ItemV5(String name, PriceV3 buyPrice, PriceV3 rentPrice) {
