@@ -1,6 +1,5 @@
 package io.npee.spring.validation.controller;
 
-import io.npee.spring.validation.domain.ItemV3;
 import io.npee.spring.validation.domain.ItemV4;
 import io.npee.spring.validation.service.ItemService;
 import lombok.RequiredArgsConstructor;

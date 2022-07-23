@@ -7,10 +7,12 @@ import javax.persistence.Embedded;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import org.springframework.validation.annotation.Validated;
 
 @Entity
 @AllArgsConstructor
@@ -24,7 +26,7 @@ public class ItemV4 {
 
     private String name;
 
-    @NotNull
+    @Valid
     @Embedded
     @AttributeOverrides({
         @AttributeOverride(name="isDetermined", column=@Column(name="isDeterminedToBuy")),
@@ -32,9 +34,10 @@ public class ItemV4 {
         @AttributeOverride(name="min", column=@Column(name="buyPriceMin")),
     })
     @Column(insertable = false, updatable = false)
+    @NotNull
     private PriceV2 buyPrice;
 
-    @NotNull
+    @Valid
     @Embedded
     @AttributeOverrides({
         @AttributeOverride(name="isDetermined", column=@Column(name="isDeterminedToRent")),
