@@ -13,8 +13,7 @@ import lombok.NoArgsConstructor;
 public class PriceV2 {
 
     private Boolean isDetermined;
-
     @NotNull
-    private Integer max;
     private Integer min;
+    private Integer max;
 }
