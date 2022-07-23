@@ -50,12 +50,14 @@ class ItemControllerV5Test {
     @Test
     void addValidatedPriceConstraintTest_bad_request() throws Exception{
         ItemV5 item = new ItemV5("itemA", new PriceV3(Boolean.FALSE, 10000, 20000), new PriceV3(Boolean.TRUE, 20000, 10000));
-        this.mockMvc.perform(post("/api/v5/item-v2")
-                                 .contentType(MediaType.APPLICATION_JSON)
-                                 .content(objectMapper.writeValueAsString(item)))
-                    .andDo(print())
-                    .andExpect(status().isBadRequest())
-                    .andReturn();
+        MvcResult mvcResult = this.mockMvc.perform(post("/api/v5/item-v2")
+                                                       .contentType(MediaType.APPLICATION_JSON)
+                                                       .content(objectMapper.writeValueAsString(item)))
+                                          .andDo(print())
+                                          .andExpect(status().isBadRequest())
+                                          .andReturn();
+        String contentAsString = mvcResult.getResponse().getContentAsString();
+        log.info("contentAsString {}", contentAsString);
     }
 
     @Test
